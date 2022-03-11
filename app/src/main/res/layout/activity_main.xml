@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/test_scan_qrcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:padding="8dp"
+        android:background="@drawable/selector_btn_blue"
+        android:text="测试扫描二维码"
+        android:onClick="onClick"/>
+
+    <TextView
+        android:id="@+id/test_generate_qrcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:padding="8dp"
+        android:background="@drawable/selector_btn_blue"
+        android:text="测试生成和识别图片二维码"
+        android:onClick="onClick"/>
+</LinearLayout>
