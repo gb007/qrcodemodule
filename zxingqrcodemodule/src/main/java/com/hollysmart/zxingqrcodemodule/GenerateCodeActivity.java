@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import cn.bingoogolapple.qrcode.core.BGAQRCodeUtil;
 import cn.bingoogolapple.qrcode.zxing.QRCodeDecoder;
 import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder;
@@ -22,26 +23,45 @@ public class GenerateCodeActivity extends AppCompatActivity {
     private TextView tv_code_type;
 
     private int QRCode_Type = 0;
+    private int code_logo = 0;
+    private String code_content = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zxing_qrcode_module_activity_generate);
         initView();
-
-
-
-
+        initData();
         createQRCode();
     }
 
     private void initView() {
-
         iv_encode = findViewById(R.id.iv_encode);
         tv_code_type = findViewById(R.id.tv_code_type);
     }
 
+    private void initData() {
+
+        QRCode_Type = getIntent().getIntExtra("code_type", 0);
+        code_content = getIntent().getStringExtra("code_content");
+
+        if (QRCode_Type == 1) {
+            code_logo = getIntent().getIntExtra("code_logo", 0);
+        }
+
+    }
+
+
     private void createQRCode() {
+
+        if(QRCode_Type == 1){//中间带logo二维码
+            createChineseQRCodeWithLogo();
+        }else if(QRCode_Type == 2){//条形码
+            createBarcodeWithoutContent();
+        }else{//普通二维码
+            createChineseQRCode();
+        }
+
         createChineseQRCode();
 //        createEnglishQRCode();
 //        createChineseQRCodeWithLogo();
@@ -60,7 +80,7 @@ public class GenerateCodeActivity extends AppCompatActivity {
         new AsyncTask<Void, Void, Bitmap>() {
             @Override
             protected Bitmap doInBackground(Void... params) {
-                return QRCodeEncoder.syncEncodeQRCode("王浩", BGAQRCodeUtil.dp2px(GenerateCodeActivity.this, 150));
+                return QRCodeEncoder.syncEncodeQRCode(code_content, BGAQRCodeUtil.dp2px(GenerateCodeActivity.this, 150));
             }
 
             @Override
@@ -96,8 +116,8 @@ public class GenerateCodeActivity extends AppCompatActivity {
         new AsyncTask<Void, Void, Bitmap>() {
             @Override
             protected Bitmap doInBackground(Void... params) {
-                Bitmap logoBitmap = BitmapFactory.decodeResource(GenerateCodeActivity.this.getResources(), R.mipmap.zxing_qrcode_module_logo);
-                return QRCodeEncoder.syncEncodeQRCode("王浩", BGAQRCodeUtil.dp2px(GenerateCodeActivity.this, 150), Color.parseColor("#ff0000"), logoBitmap);
+                Bitmap logoBitmap = BitmapFactory.decodeResource(GenerateCodeActivity.this.getResources(), code_logo);
+                return QRCodeEncoder.syncEncodeQRCode(code_content, BGAQRCodeUtil.dp2px(GenerateCodeActivity.this, 150), Color.parseColor("#ff0000"), logoBitmap);
             }
 
             @Override
@@ -159,7 +179,7 @@ public class GenerateCodeActivity extends AppCompatActivity {
             protected Bitmap doInBackground(Void... params) {
                 int width = BGAQRCodeUtil.dp2px(GenerateCodeActivity.this, 150);
                 int height = BGAQRCodeUtil.dp2px(GenerateCodeActivity.this, 70);
-                return QRCodeEncoder.syncEncodeBarcode("bingoogolapple123", width, height, 0);
+                return QRCodeEncoder.syncEncodeBarcode(code_content, width, height, 0);
             }
 
             @Override

@@ -66,6 +66,11 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             if (startCode == 1) {
                 startActivityForResult(Intent(this, ScanCodeActivity::class.java),REQUEST_CODE_SACN_QRCODE)
             } else if (startCode == 2) {
+
+                var intent = Intent()
+                intent.putExtra("code_type", 0)//0为不带logo ，1为中间带logo图案 ，2为条形码
+                intent.putExtra("code_content", "111233233323")//二维码内容
+//              intent.putExtra("code_logo",R.drawable.ic_launcher_background)
                 startActivity(Intent(this, GenerateCodeActivity::class.java))
             }
 
