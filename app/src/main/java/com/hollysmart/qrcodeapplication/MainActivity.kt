@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     private val REQUEST_CODE_QRCODE_PERMISSIONS = 1
 
     private var startCode = 1; //1为scan 2为generate
-
     private val REQUEST_CODE_SACN_QRCODE = 999;
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,7 +69,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                 var intent = Intent()
                 intent.putExtra("code_type", 0)//0为不带logo ，1为中间带logo图案 ，2为条形码
                 intent.putExtra("code_content", "111233233323")//二维码内容
-//              intent.putExtra("code_logo",R.drawable.ic_launcher_background)
+//              intent.putExtra("code_logo",R.drawable.ic_launcher_background)//logo图案
                 startActivity(Intent(this, GenerateCodeActivity::class.java))
             }
 
