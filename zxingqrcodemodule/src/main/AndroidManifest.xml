@@ -5,5 +5,11 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <application>
+        <activity android:name=".ScanCodeActivity" />
 
+        <activity
+            android:name=".GenerateCodeActivity"
+            android:screenOrientation="portrait" />
+    </application>
 </manifest>

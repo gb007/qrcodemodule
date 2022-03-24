@@ -22,14 +22,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.hollysmart.zxingqrcodemodule.ScanCodeActivity" />
-
-        <activity
-            android:name="com.hollysmart.zxingqrcodemodule.GenerateCodeActivity"
-            android:screenOrientation="portrait" />
-
-
-
     </application>
 
 </manifest>
